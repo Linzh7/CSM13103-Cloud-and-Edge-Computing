@@ -1,0 +1,38 @@
+---
+title: "A3-Virtualization"
+author: "Linzh (Zhongyu Zhao)"
+output: pdf_document
+---
+
+# 1. The authors state "Despite their incredible complexity, computer systems exist and continue to evolve because they are designed as hierarchies with well-defined interfaces that separate levels of abstraction." What do the authors imply by "designed as hierarchies"? Can you provide two examples of the hierarchies? (0.5 points)
+
+# 2. Continuing on the previous question, what do the authors imply by "well-defined interfaces that separate levels of abstraction"? What is the need for "levels of abstractions"? (0.5 points)
+
+
+# 3. The authors use figure 2 to discuss various interfaces. How are interfaces 3 and 4 different?  (0.25 points) 
+
+
+# 4. Continuing on the previous question,  can you provide an example for interface 3 and an example for interface 4? (0.25 points)
+
+
+# 5. Is it possible for an application to bypass the operating system and use interface 3 (system ISA)? If yes, can you provide an example? If no, why? (0.5 points)
+
+
+
+# 6. Can you describe Figure 4 with an example of a HLL? (0.5 points)  
+
+
+
+# 7. Where do docker containers fit in the taxonomy provided in Figure 5? Why? (0.5 point)
+
+# 8. Please provide two scenarios where it would be useful to run a docker container inside a system virtual machine that uses either a type 1 or type 2 hypervisor. (An overview of type 1 and type 2 hypervisors is available here: https://en.wikipedia.org/wiki/Hypervisor) (1 point)
+
+
+# 9. Please provide two shortcomings of running a docker container inside a system virtual machine that uses either a type 1 or type 2 hypervisor. (1 point)
+
+
+
+
+
+
+

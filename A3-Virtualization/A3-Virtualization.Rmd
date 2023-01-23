@@ -1,6 +1,5 @@
 ---
 title: "A3-Virtualization"
-author: "Linzh (Zhongyu Zhao)"
 output: pdf_document
 ---
 

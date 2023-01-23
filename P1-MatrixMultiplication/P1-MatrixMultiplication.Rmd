@@ -1,6 +1,5 @@
 ---
 title: "P1 - Matrix Mutiplitication"
-author: "Linzh (Zhongyu Zhao)"
 output: pdf_document
 ---
 

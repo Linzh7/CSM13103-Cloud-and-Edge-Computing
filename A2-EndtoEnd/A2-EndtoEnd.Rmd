@@ -1,6 +1,5 @@
 ---
 title: "A2 - End to End"
-author: "Linzh (Zhongyu Zhao)"
 output: pdf_document
 ---
 

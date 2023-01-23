@@ -4,35 +4,57 @@ author: "Linzh (Zhongyu Zhao)"
 output: pdf_document
 ---
 
-# 1. The authors state "Despite their incredible complexity, computer systems exist and continue to evolve because they are designed as hierarchies with well-defined interfaces that separate levels of abstraction." What do the authors imply by "designed as hierarchies"? Can you provide two examples of the hierarchies? (0.5 points)
+# 1. What do the authors imply by "designed as hierarchies"? Can you provide two examples of the hierarchies? (0.5 points)
 
-# 2. Continuing on the previous question, what do the authors imply by "well-defined interfaces that separate levels of abstraction"? What is the need for "levels of abstractions"? (0.5 points)
+As I mentioned at the A2 report, I think the [OSI model](https://en.wikipedia.org/wiki/OSI_model) is such a good example for this question. The network system of a computer is divided into 7 (5) parts, and each part provides some functions and APIs. Each layer will process the data it get. Then, the data (frame, package, etc.) will be passed to next layer. The interfaces in OSI model is not a programmatic interface in the strict sense but a generalized interface interface. The model specifies protocols, signaling systems, etc.
 
+Another example I will talk about software development. Recently, more and more development framework, e.g. Spring Framework, Flutter, Vue.js, etc. All of them provide a platform, which programmers could use their 'APIs' to build their own application. In this context, I may could define them as 'applications designed as hierarchies', which means the lower layer is programmed by those framework, and the upper layer is programmed by the programmers.
+
+# 2. What do the authors imply by "well-defined interfaces that separate levels of abstraction"? What is the need for "levels of abstractions"? (0.5 points)
+
+In my opinion, abstractions are logical models/layers, which try to simply the whole complex system into a model network. However, the network will be vague, if we only have these models/layers. Therefore, the interfaces are defined. These interfaces are the edges in the network, which defines the boundary of each model/layer and how it will interact with other models/layers.
+
+To make a huge system easy to be developed and debugged, we could divide the system into parts. As we mentioned above, there are certain restrictions on the format and content of the transmitted data. Therefore, each subsystem could be development . Additionally, if interfaces are well-defined, the abstraction will be implement into models without conflict and ambiguity. Then each model/layer could be implemented separately. In this way, the system development time will be reduced.
 
 # 3. The authors use figure 2 to discuss various interfaces. How are interfaces 3 and 4 different?  (0.25 points) 
 
+The interface 3 is system ISA, while interface 4 is user ISA.
 
-# 4. Continuing on the previous question,  can you provide an example for interface 3 and an example for interface 4? (0.25 points)
+Interface 3 is a superset of interface 4, which mean system ISA includes user ISA. Moreover, the user ISA includes the ISA accessible to application programs, meanwhile, the system ISA also includes those system hardware operations.
 
+# 4. Continuing on the previous question, can you provide an example for interface 3 and an example for interface 4? (0.25 points)
+
+User ISA: In C/C++ you could set loop variable to register variable, which means this code allow programmers (users) control the register on CPU. If this example is not convince enough. I think APIs are also good examples. For example, Windows provides [Disk Management Functions](https://learn.microsoft.com/en-us/windows/win32/fileio/disk-management-functions) to manage the storage of the computer.
+
+System ISA: Without considering the overclocking of CPU, memory and other hardware by BIOS, the control of such devices by the system is the system ISA.
 
 # 5. Is it possible for an application to bypass the operating system and use interface 3 (system ISA)? If yes, can you provide an example? If no, why? (0.5 points)
 
+Continuing from the the question 4, I would say it is possible. The overclock from BIOS might be a example. However, I do not think the BIOS control could be considerd as a 'application'.
+
+Therefore, I would say that applications might not use system ISA, however, some other 'thing' could, e.g. BIOS.
 
 
 # 6. Can you describe Figure 4 with an example of a HLL? (0.5 points)  
 
+For the subfigure (a), if we write C++ program and compile it, the compiler will convert our code into intermediate code, like LLVM IR. Then the compiler will process the intermediate code, and an executable file will be created. Then, if we run this program on computer, it will occupy some memory.
 
+However, if we use the method of subfigure (b), we will use another program language instead of C++ (or do not use some specific features), due to the lack of portability. Therefore, Java will be a better example. Once we write Java on a computer, the code you write will be convert into bytecode instead of the executable file. Then the bytecode could be run by different JVM (Java virtual machine), which means this bytecode could be loaded on different kinds of VM in different OSs, then may be assigned to computers with different architectures. Meanwhile, C/C++ also may be executed on VM by analyze each line and interpret into different host instructions.
 
 # 7. Where do docker containers fit in the taxonomy provided in Figure 5? Why? (0.5 point)
 
-# 8. Please provide two scenarios where it would be useful to run a docker container inside a system virtual machine that uses either a type 1 or type 2 hypervisor. (An overview of type 1 and type 2 hypervisors is available here: https://en.wikipedia.org/wiki/Hypervisor) (1 point)
+I did not study computer science at my bachelor. Therefore, I use some information from Wikipedia, which means the conclusion I will draw is only my humble opinion.
 
+I think docker containers are System VMs-different ISA. Because docker run on virtualization interfaces from Linux core, especially, in MacOS the Linux core is also virtualized. Moreover, docker is a lightweight core, which make use of the namespace isolation on Linux to support their function. Besides, docker also support different ISA, because docker could be deployed on both x86_64 and ARM machines.
 
-# 9. Please provide two shortcomings of running a docker container inside a system virtual machine that uses either a type 1 or type 2 hypervisor. (1 point)
+# 8. two scenarios where useful run docker inside a system VM that uses type 1 or type 2 hypervisor.(1 point)
 
+Type 1: maybe all of those dockers do not need host OS support could be classified into this category. For example, SQL database may only need the IO on disk and analyze for the query, which is not need OS support. Besides, if we want to make our computer to a 'render farm', type 1 is also useful, because it could make use of the power of GPU.
 
+Type 2: if those dockers which has some APIs or other function related to the host OS, they might be type 2. Like provide Windows/Linux VM for different users in a secure environment, it will be useful for the provider user interface independently, while manage the other resources on a Windows/Linux OS.
 
+# 9. two shortcomings of running a docker inside a system VM that uses either a type 1 or type 2 hypervisor. (1 point)
 
+First, even though the docker is lightweight, the virtualization still cost some resources. Therefore, if you are a sensitive user, you may feel uncomfortable.
 
-
-
+Additionally, the security of containers also worth to consider about. For example. is the shared memory or disk could be read by some bypass function. What if some container just want to destroy this disk or cause some power failure.

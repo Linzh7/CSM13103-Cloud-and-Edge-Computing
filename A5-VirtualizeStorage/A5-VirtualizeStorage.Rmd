@@ -1,0 +1,21 @@
+---
+title: "A5-VirtualizeStorage"
+output: pdf_document
+---
+
+# 1. What is the problem the authors are attempting to solve? (1 point)
+
+
+
+# 2. In Section 1, the authors state "having 2 independent I/O schedulers can lead to harmful choices based on inaccurate assumptions about the guest application or underlying hardware." Which are the two I/O schedulers the authors are referring, and what are the harmful choices and inaccurate assumptions they are referring to? (1 point)
+
+# 3. In Section 2, the authors state "They [Boucher and Chandra] argue for I/O scheduling in the guest, as the guest has more visibility into application patterns; implicit in this argument is the idea that the guest can make educated guesses about the underlying media. Our position is somewhat different: the host should do I/O scheduling, as the host knows media details and understands other guests; but the guest should expose more performance hints to the host." How are these two sentences related to the end-to-end argument of system design? Which approach [Boucher and Chandras (approach 1), or approach of the authors (approach 2)] would you take? Why? (1 point) 
+
+# 4. The authors state "The key reason to separate the storage stack design is to permit the API and media layers to evolve independently and rapidly." Why is this (allowing API and media layers to evolve independently) important? (0.5 points)
+
+# 5. What are the key strengths of this vision (1-3 sentences) ? (Note that the authors do not present a prototype, so limit the answer to the vision) (0.25 points)
+
+# 6. What are the key shortcomings of the author's vision in your opinion (1-3 sentences) (0.25 points)?
+
+# 7. How would you build on the insights on this article? Have some cloud providers started implementing this vision? If yes, can you give some supporting examples? (1 point)
+

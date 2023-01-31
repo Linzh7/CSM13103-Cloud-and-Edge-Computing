@@ -1,0 +1,93 @@
+---
+title: "A4 - Ramcloud"
+output: pdf_document
+---
+
+# 1. What is the problem the authors are attempting to solve? Who benefits from addressing this problem? (0.5 points)
+
+The classic memory allocation cannot manage the changing memory occupation, due to the attributes that cannot change location after allocating, while the the RAM-storage strategy has dynamically changing memory.
+
+This improvement benefits those DRAM-based storage system, e.g. RAMCloud.
+
+# 2. How is workload W2 different from workload W8? (0.25 points)
+
+First, the size of data before deleting is different. The data in W2 is fixed 100 Bytes, while the data size in W8 is random from 50 to 150 Bytes.
+
+Second, the delete phase in W2 will not delete any data, while W8 will delete about 90% of previous data before writing.
+
+Last, the size of data they write into memory after deleting is also different. The data in W2 is fixed 130 Bytes for each record (if I could call it as 'record'), and the data in W8 is also random from 5000 to 15000 Bytes.
+
+# 3. What is are the key takeaway messages from Figure 1? (1 point)
+
+First, all non-copying allocators showed on this figure always occupy about 1.5-2.0 times memory than the size of live data.
+
+Then, glibc 2.12 malloc could be considered as the best allocator among them, because it always occupy the smallest size of extra memory.
+
+Moreover, there is no significant difference between fixed data size or variable size. Both of the results are terriable.
+
+*Further thinking:*
+
+*Last, the best performances are the results on W1 and W7 (better than W2-W6, W8 in many cases). W1 has no other operation after the first writing. And W7 is much worth to discuss. In my humble opinion, I think it might related to the size it deleted and rewrited is no huge difference, i.e. uniform 1,000 - 2,000 Bytes and uniform 1,500 - 2,500 Bytes.*
+
+# 4.  In Section 2, Why does a garbage collector need to know the pointers to an object? (0.25 points) 
+
+Because in the copying allocators, they need locate the address of data, then use pointers to copy these data to another space in memory.
+
+# 5. Can the pause times of garbage collectors that require a global scan affect the tail latency of the applications that internally use these garbage collectors? How? (1 point)
+
+Yes.
+
+When pause time happens, the whole system could be considered as being frozen. In this situation, application cannot work properly, which means the latency will be extended.
+As a result, the normal latency will become the tail latency, and the tail latency will become horrible latency.
+
+# 6. What is an uninterpreted data blob, and why is it important for the data blob to be uninterpreted? (0.5 points)
+
+Uninterpreted data blob is a binary file which cannot be read by human, because the data is storage in binary format. Comparing with the readable format, uninterpreted data blob could save space and also much more easier and faster for computer to read and write.
+
+# 7. Why is log cleaning needed, and what is the downside of cleaning the disk and memory together (not independently)? (0.5 points)
+
+Concentrate free space in one place by organizing data which is still in use.
+
+The cost of cleaning disk and cleaning memory are different. If clean them together, we will either occupy the bandwidth of disk or waste the space of memory.
+
+# 8. Why does the increase in memory utilization degrade the system performance? (0.5 points)
+
+Deleting objects also need some memory to execute. Moreover, there might also be some conflict in hash table, which leads to . As a result, when free memory is low, we cannot ensure that we can clean memory in a perfect timing.
+
+# 9. Please describe Figure 6.
+## a. What is the workload used? (0.25 points)
+
+The size of objects are 100 bytes, 1000 bytes, and 10000 bytes. And they run the test on memory utilization from 30% to 90%.
+
+## b. Which units do the authors use for quantifying the system performance? (0.25 points)
+
+The end-to-end client write performance in different memory utilization.
+
+## c. What is the key takeway from this figure? (0.5 points)
+
+In most situation, two-level methods are better than one-level methods. Moreover, the performance of one-level methods will drop down quickly when memory utilization increase. There is a slight difference between zipfian and uniform. Sequential might have a better performance in writing big objects.
+
+# 10. What are the key takeaway messages from Figure 7? Is the two level cleaner more efficient for 100 byte objects or 10000 byte objects? (0.5 points) 
+
+When the size of objects is small, the differences between Uniform and Zipfian are more significant. However, when the size of objects increase, the advantages brought by two-level methods shows up. When the size of objects are 10000 bytes, two-level method achieve the ideal performance (close to 0).
+
+# 11. Based on Figure 9, what would you do to reduce the tail latency of the response time of your application? Why? (2 points)
+
+If tail latency is important for this service, I will not use cleaner. Because though the 99.9% of the user will not face the latency problem, there still about 0.1% user will face much worth latency if we use cleaner. the difference below 0.1 shows that the cleaner have a small probability to cause worth latency.
+
+# 12. What is kernel-bypass and why does it result in improved performance? (0.5 point)
+
+Kernel-bypass is a user-level layer aimed to provide a illusion of a transport interface with infinite bandwidth by providing access to the network card with minimal latency without any data passing from the kernel. The improvement is caused by the directly transmission, which means there is no other detour.
+
+# 13. What are the key strengths of this article in your opinion, and how does this article adhere to the end-to-end arguments in system design? (0.75 points)
+
+The paper designed a lot of experiments and used reliable data to support the argument.
+
+The kernel bypass, which increases bandwidth by directly accessing the network card, are close related to end-to-end arguments. This methods reduce the redundancy of intermediate layer.
+
+# 14. What are its weaknesses in your opinion, and how would address them? (0.75 points)
+
+For this article, I want to see some practical applications and performance in applications.
+
+Moreover, even with the author's method, the sorting of part of the memory still needs to consume certain resources and time. I think that the organization of memory can also be copied according to the degree of activity. If a memory has not been used for a period of time and has not been marked as invalid, then these unused ones can be sorted first.
+

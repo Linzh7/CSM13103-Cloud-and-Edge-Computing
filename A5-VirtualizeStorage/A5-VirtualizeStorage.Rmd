@@ -5,17 +5,36 @@ output: pdf_document
 
 # 1. What is the problem the authors are attempting to solve? (1 point)
 
+If any I/O on VM need to emulate the drive and other complex operation, the efficiency of the system will be reduced. To address this problem, authors want to propose a Interface between media optimization and APIs. Specifically, traditional storage stacks are difficult to distinguish between API and media optimization. Therefore, the authors' proposed architecture also integrates all functions in one layer. Moreover, the different types of storage hardware also should be auto-adapted.
 
+# 2. Which are the two I/O schedulers, and what are the harmful choices and inaccurate assumptions? (1 point)
 
-# 2. In Section 1, the authors state "having 2 independent I/O schedulers can lead to harmful choices based on inaccurate assumptions about the guest application or underlying hardware." Which are the two I/O schedulers the authors are referring, and what are the harmful choices and inaccurate assumptions they are referring to? (1 point)
+Guest scheduler and host scheduler. For writing, system tend to cache the file which located close sectors. However, the sectors which are adjacent in the perspective of guest may not be adjacent to each other in physical disk. Additionally, the system will read-ahead data to improve the performance, meanwhile, system also will read so many data that useful data is pushed out.
 
-# 3. In Section 2, the authors state "They [Boucher and Chandra] argue for I/O scheduling in the guest, as the guest has more visibility into application patterns; implicit in this argument is the idea that the guest can make educated guesses about the underlying media. Our position is somewhat different: the host should do I/O scheduling, as the host knows media details and understands other guests; but the guest should expose more performance hints to the host." How are these two sentences related to the end-to-end argument of system design? Which approach [Boucher and Chandras (approach 1), or approach of the authors (approach 2)] would you take? Why? (1 point) 
+# 3. In Section 2, How are these two sentences related to the end-to-end argument of system design? Which approach [Boucher and Chandras (approach 1), or approach of the authors (approach 2)] would you take? Why? (1 point) 
 
-# 4. The authors state "The key reason to separate the storage stack design is to permit the API and media layers to evolve independently and rapidly." Why is this (allowing API and media layers to evolve independently) important? (0.5 points)
+Approach 1 is more like the end-to-end argument, because they want the end implement (guest) to ensure the workflow instead of the intermediate one (host). Approach 2 is aimed to provide more services by the intermediate layer, which violate the end-to-end argument.
+
+I may prefer the approach 2, because the host could manage the disk I/O more efficiently, while guests cannot arrange those low-level writing tasks due to the lack of 'co-operation'. It is much more easy that guest provide some information about what they will read/write next to host rather than the other way around.
+
+# 4. Why allowing API and media layers to evolve independently important? (0.5 points)
+
+Because if we combine them together, API cannot adept the different media, which slowed down the development of API. Moreover, if they could be developed independently, API could also try to extend new features and some optimization on I/O.
 
 # 5. What are the key strengths of this vision (1-3 sentences) ? (Note that the authors do not present a prototype, so limit the answer to the vision) (0.25 points)
 
+- More effective host-guest collaboration, more efficient I/O.
+- Freer API development will also leads to more convenient upper-level development.
+- The host is more robust and can adapt to more types of hard drives, more guests, and more diverse development environments.
+
 # 6. What are the key shortcomings of the author's vision in your opinion (1-3 sentences) (0.25 points)?
+
+- Violates the end-to-end argument, which may cause additional overhead.
+- Is there a more efficient way to allocate storage space for different guests, so that it can be better managed.
+- Different media structures may have different effects.
 
 # 7. How would you build on the insights on this article? Have some cloud providers started implementing this vision? If yes, can you give some supporting examples? (1 point)
 
+I think it makes a lot of sense to separate the media from the API, and as mentioned in the end-to-end paper, we could benefit a lot, e.g. .
+
+For example, Amazon's S3 storage uses many different storage hardware and supports different media layers well. But as a client, I can still manipulate them through the lots of APIs.

@@ -1,0 +1,59 @@
+---
+title: "A6 - VXLans"
+output: pdf_document
+---
+
+# 1. What is the problem VXLANs are trying to solve? (0.5 points)
+
+Due to the increasing requirements of server virtualization, virtual servers occupied so many VLANs that exceed the limits of current technology. Meanwhile, the table in ToR is also not big enough to support the huge VM network. However, if above problems could be solved, the classic approaches will lead to some disabled links. Moreover, some protocol based on IP also needs extra features.
+
+# 2. Please describe what is an overlay network, and provide an example of an overlay network (other than VXLANs) ? (0.25 points)
+
+In this paper, the overlay network is the segment, which has the segment ID to support large segments in same domain. The VMs could communicate with each other only if they are in the same VXLAN segment.
+
+Generally, the overlay network is a virtual or logical network based also on the physical network. Another example could be VPN.
+
+# 3. Will the MAC addresses of veth0 be present in the 'mac address table' of this switch? Why? (0.25 points) 
+
+I think veth0 will not be present in the MAC table. Because the NAT will become a *overlay* to cover the address of veth0, any traffic veth0 send and recived will be translated which means the address and port will be different.
+
+# 4.What is broadcast isolation? (0.5 points)
+
+Broadcast is a operation in a network, whose recipient are all computers. And the broadcast isolation is the method which could limit the range of any broadcast to prevent that the traffic be forwarded to all VMs in this VLAN.
+
+# 5. Please describe Figure 1. (0.75 points).
+
+The outer ethernet header contains the data link layer information (MAC addresses), the VXLAN information (VLAN Tag) and other information.
+
+The outer IPv4 header is similar with normal IPv4 header, there are version, IHL, etc.
+
+However, the structure of UDP header is a little bit different. The destination port is shifted to the VXLAN port.
+
+The VXLAN header is a new thing. Despite the 8 flag-like bits and 24 reserved bits, this header also contain the VXLAN network identifier, then some computers who receive this frame will know if this frame is for it.
+
+The inner ethernet header is also similar to the outer one, and the differences are the mac addresses is inner's.
+
+Last, the payload is the combination of ethertype of original payload and the original payload. But in payload, it does not include the original frame check sequence, and they add another new FCS at the end.
+
+# 6. How is the VXLan Frame described in Figure 1 different from the one in Figure 2? (0.25 points)
+
+The frame in figure 2 is designed for IPv6, which will import some useful features and also change lots of structures. Like the outer IPv6 header is not similar to the header in Fig. 1. Moreover, the Ethertype is also different. But others are most similar.
+
+# 7. What is the scope of a MAC frame? For instance, what is the scope of a frame with destination FF:FF:FF:FF:FF:FF? (0.5 points)
+
+Scope of a MAC frame is like a netmask, which shows the range of this frame could go to.
+
+The scope of a frame with destination FF:FF:FF:FF:FF:FF is all of the VMs.
+
+
+# 8. What steps are needed to ensure that the two containers can use VXLANs to communicate with other?  (2 points)  
+
+1. The routers in campus and my room should be configured to support VXLAN, when two routers could *ping* each other.
+2. Configure a service access point on both of the routers.
+3. After recording the two IPs, we are able to establish the VXLAN tunnel between them.
+4. Then two computers could communicate with each other.
+
+Info from:
+https://support.huawei.com/enterprise/mx/doc/EDOC1100112360/84173104/example-for-configuring-communication-within-a-network-segment-through-a-vxlan-tunnel
+
+

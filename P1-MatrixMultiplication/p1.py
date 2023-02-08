@@ -1,5 +1,6 @@
 import numpy as np
 from memory_profiler import profile
+import time
 
 
 # get matirx with size 1e6 * 1e3
@@ -38,5 +39,16 @@ def compute():
     # step 2, compute A * (B * C)
     return np.dot(get_A(), BC)
 
+
+def compute2():
+    # step 1, compute B*C first
+    BC = np.dot(get_B(), get_C())
+    # step 2, compute A * (B * C)
+    return np.dot(get_A(), BC)
+
+
 # let's go
-ABC = compute()
+t1 = time.time()
+# ABC = compute()
+ABC = compute2()
+print(f'Time: {time.time() - t1} seconds')

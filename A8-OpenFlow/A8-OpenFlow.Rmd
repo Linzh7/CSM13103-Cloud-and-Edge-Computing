@@ -7,6 +7,9 @@ output: pdf_document
 
 For network research, medium-scale (like in campus) physics experiments and make changes on network products, like switches, are expensive and unrealistic. However, researcher will have more data and feedback if they could deploy their approaches on the real network. Therefore, authors proposed OpenFlow to enable programmable network on real world without huge replace action and leak of internal workings.
 
+
+
+
 # 2. What do the authors imply by the ossification of the network infrastructure? (0.25 points)
 
 Because any new propose cannot get enough experience from large-scale experiments. We cannot deploy these new approaches in real world due to the lack of confidence. As a result, the infrastructure still maintain the old style and it is hard to improve on infrastructure.

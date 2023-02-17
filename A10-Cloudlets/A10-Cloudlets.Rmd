@@ -1,0 +1,30 @@
+---
+title: "A10-Cloudlets"
+output: pdf_document
+---
+
+# 1. What is the problem for which the authors are proposing VM based cloudlets?
+
+They want to give mobile devices which limited by resources a real-time interactive response. This method allows mobile devices to connect to high-bandwidth wireless LANs with minimal latency, allowing them to access resources without relying on distant clouds.
+
+
+# 2. 
+
+
+
+# 3. 
+
+## a. Does Table 1 contradict the claims of Satyanarayan et al, and Why?  (0.75 points)
+
+The idea that there is only 0.1s latency in 6G does not contradict the claims of the authors.
+They believe that latency is a major issue in mobile computing. Moreover, thin clients might deliver a better user experience than standard desktop computers, because of quicker reaction times and more immersive. But the latency between 1ms and 0.1ms does not make lots of difference for a human being. The human reaction time is 0.2s, or 200ms, they cannot distinguish the difference!
+
+## b. If we would like to have an end-to-end latency of 0.1 ms what is the upper bound on the distance between the end-user device and server on which the cloudlet is being spawned?
+
+I did not read discussion about the latency dirctly. Therefore, I think that the latency is depend on the speed of light.
+
+If we assume the speed of light is approximately $3*10^5 km/s$, the maximum distance between the end-user device and server would be $30km$ when we want the latency below $0.1ms = 1*10^{-4}s$.
+
+# 4. Describe the architectural model for the Kimberly system, and state how the components of this system are related to the components of Borg.
+
+The Kimberley system is an architectural model for cloudlet-based, resource-rich, mobile computing. It consists of a mobile device, a cloudlet infrastructure, and a controller called the Kimberley Control Manager (KCM). The KCM is responsible for establishing a secure TCP tunnel between the mobile device and the cloudlet, and for managing service discovery and network management. The components of the Kimberley system are similar to the components of the Borg system, which consists of a master node, a set of worker nodes, and a controller responsible for managing resource allocation and scheduling.

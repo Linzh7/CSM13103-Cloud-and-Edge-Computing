@@ -11,7 +11,11 @@ Nowadays, more and more data centers were used among the world. However, how to 
 
 Diurnal usage pattern indicates that some requests or resources usage have a one-day-long cycle. For example, a student may log Moodle at 9.00 to download slides, which leads to a usage peak. Then, about 12.00, students might go for lunch, as a result, the load will be slightly reduced. Then, afternoon, students download matriials again. After dinner, may some students are trying to catch the due, and there might be another peak. At the midnight, everyone will sleep, the load will be a valley.
 
-# 3. The following contains a snippet of a C++ program. Can you compile the code and provide the size of the binary with a) static linking and then b) without static linking? What is the reason for the size difference? (0.5 points)
+# 3. The following contains a snippet of a C++ program. Can you compile the code and provide the size of the binary with 
+1. static linking and then 
+2. without static linking? 
+
+What is the reason for the size difference? (0.5 points)
 
 ```{C++}
 # include <iostream>
@@ -20,6 +24,10 @@ std::cout << "Hello World" << std::endl;
 return 0;
 }
 ```
+
+![file size difference](cpp.jpg)
+
+It is because if we use static linking, we will compile what this program need in the executable file. As a result, the size will be much bigger because it contains everything we include in source code.
 
 # 4. Please describe Figure 1 in 5-10 sentences (2.5 points)
 

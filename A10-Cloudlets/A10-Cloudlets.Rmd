@@ -10,7 +10,30 @@ They want to give mobile devices which limited by resources a real-time interact
 
 # 2. 
 
+We give three figures which shows the min, max, and average delay at 3 different time points and two network conditions.
 
+The three time points are: 17.2.2023 NIGHT, 18.2.2023 MORNING, 19.2.2023 NOON
+
+And we use two network services provider: HOAS network, which is privided by DNA, and the mobile hotpot provided by Elisa.
+
+![min delay](min.png)
+
+![max delay](max.png)
+
+![average delay](avg.png)
+
+The washington.edu cannot response our request at 19.2.2023 noon, therefore, there is no data for that.
+
+All three graphs show that latency tends to correlate positively with geographic distance, but Chile appears to be faster than the US.
+I checked the submarinecablemap and found no fiber optic cables from Europe to Chile, so I thought it might be because of the heavy network traffic in the United States, which blocked the communication, while the backlog in South America was not serious, so I got a reply faster.
+
+What is more, we found that Google's service is often very fast, followed by yle and hbo, which also shows that Google has done a lot of work in optimizing the search speed. For example, the .com domain name can directly find the nearest server. Thus even faster than the local yle.
+
+And the stability of google.fi is not even as good as google.com, I don't understand why.
+
+Moreover, at the same time, the delay of broadband is smaller than that of mobile hotspots, which may also be due to additional routing.
+
+![submarine cable map](map.jpg)
 
 # 3. 
 
@@ -27,4 +50,7 @@ If we assume the speed of light is approximately $3*10^5 km/s$, the maximum dist
 
 # 4. Describe the architectural model for the Kimberly system, and state how the components of this system are related to the components of Borg.
 
-The Kimberley system is an architectural model for cloudlet-based, resource-rich, mobile computing. It consists of a mobile device, a cloudlet infrastructure, and a controller called the Kimberley Control Manager (KCM). The KCM is responsible for establishing a secure TCP tunnel between the mobile device and the cloudlet, and for managing service discovery and network management. The components of the Kimberley system are similar to the components of the Borg system, which consists of a master node, a set of worker nodes, and a controller responsible for managing resource allocation and scheduling.
+The Kimberley system is an architectural model for cloudlet-based, resource-rich, mobile computing. It consists of a mobile device, a cloudlet infrastructure, and a controller called the Kimberley Control Manager (KCM). The KCM is responsible for establishing a secure TCP tunnel between the mobile device and the cloudlet, and for managing service discovery and network management. The components of the Kimberley system are similar to the components of the Borg system, which consists of a master node, a set of worker nodes, and a controller, which responsible for managing resource allocation and scheduling.
+
+
+

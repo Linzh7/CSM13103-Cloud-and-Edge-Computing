@@ -1,0 +1,66 @@
+---
+title: "A11-Serverless"
+output: pdf_document
+---
+
+# 1.  In the section titled "Defining Serverless Computing", the author present a wide range of definitions. Why are there so many definitions, and what is serverless computing in your opinion? (0.25 points)
+
+Because there are to many consideration nowadays for the developer about how to manipulate the clusters or servers they use. However, if we remove the server part in this scope, it is a little bit hard for people to understand how to use this new model, which leads to the ambiguous definition.
+
+In my perspective, serverless computing is aimed to provide a services you do not have to worry everything else except your code, which allows developers to run their code without having to worry about the underlying infrastructure or server management.
+
+# 2.  Continuing on the previous question, to which of the definitions described in this section is your answer the farthest from? Why? (0.75 points)
+
+I think my definition is not close to the glue one. Because they think FaaS is want to provides a bridge, a glue between different cloud servises. However, the severless have a much bigger scope than just a bridge. This defination limits what imagination of people.
+
+# 3. Please summarize what is FaaS, and what is BaaS, and how is your definition of serverless related to "Serverless Cloud Computing = FaaS + BaaS" (0.5 points)
+
+Function-as-a-Service is a kind of serverless computing platform, where the unit of computation is a function , e.g., response to some requests. Meanwhile,  Backend-as-a-Service is another kinds of cloud service that provides developers with a approach to connect their applications to cloud services, e.g., databases, storage.
+
+I think that severless is want to provides both the backend applications and the function computation, which means the developer could run their codes to answer users request, and also use some provided backend services. In this way, the developer can save lots of times on build their wheel, e.g., link their application on another database services, and focus on their application itself.
+
+# 4. The authors use the term "scale to zero" in multiple places. What is scale to zero, and why is it important? (0.5 point)
+
+Scale to zero allows applications do not use any resources when it is not running or responding requests.
+
+This method allows developers to not pay for idle resources, because these resources are not occupied. Moreover, it also enables developers to focus on developing applications instead of building these wheels.
+
+# 5. The authors state "Scaling  to zero, however, leads to problems of cold starts." What is a cold start and why does scaling to zero lead to problems of cold starts?  (0.5 points)
+
+A cold start is a situation that some applications will take a longer time than just recover from idle. Because the cold start up needs execute more functions, e.g. self-check, hardware-check.
+
+If an application scaled to zero, when it want to start to response or running it must be apply for some resources and instantiated itself, etc., which can lead to higher latency.
+
+# 6. Please summarize use case 1 and provide two reasons for Netflix to transcode the video files? (0.5 points)
+
+Netflix uses serverless computing to transcode video files.
+
+Because it allows them to split and transcodes videos quickly and cost-effectively. Moreover, it also allows restart this workflow easily when some error occurred.
+
+
+# 7. The authors state "Serverless computing and FaaS are new and quickly changing and currently there are no standards. As the area matures, standards can be expected to emerge." Please provide at least one example of 
+
+
+## a) either a serverless or cloud computing standard and where it is used  (0.25 points),
+
+Cloud Native Computing Foundation give us some standard, it might be used in some companies want to advertise their product and make a unify interface.
+
+## b) one example or one reference or one reason why standards might not emerge.  (0.25 points)
+
+I maybe could provide a reason. I think this field is still a new research and engineer area, which means will rapidly grow and even chanage a lot. Therefore, if some standards are given, it might easy to outdate and be abandoned.
+
+# 8. How is serverless model for computing related to John McCarthy's vision of computing as a utility? (0.5 points)
+
+Because serverless allows developers to pay what they actually used instead of a 'subscribe mode'. In this way, developers are ablt to focus on their own stuff instad of building wheels (did I write the word wheel for several times?), and it also allows them to manage their workflow easily and fault-tolurance, e.g., the example from Netflex.
+
+
+# 9. Which of the challenges and research opportunities mentioned in this article need to be addressed to realize McCarthy's vision? Why (0.5 points)
+
+The fine-grained time units and how to provide a guarantee for QoS.
+
+Because address this problem could make this services much more reliable, and work on demand, which could provides a better user experience.
+
+
+# 10. On reading this article, which are the open areas that are not mentioned in this article but need to be addressed to realize McCarthy's vision (0.5 points)
+
+The security in serverless. Like in VM, we will consider how to prevent some attacker get other VM's data. And from the vision, we should provide a real 'utility', we must ensure that the service is safe, and trustworthy.

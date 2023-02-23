@@ -4,12 +4,181 @@ output: pdf_document
 ---
 
 
+# 1. What is the problem for which the authors of Ray are attempting to solve? Who are the potential users of Ray? (0.5 point)
+
+They want to provides a online distributed system for training, serving, and simulating reinforcement learning applications. 
+
+Potential users of Ray include researchers and some companies who use reinforcement learning to provides some services, e.g., decision making companies.
+
+# 2. 
+
+## a) How many CPUs, CPU cores, and CPU threads (virtual cores) are in the device you are using? Can you share the model number of the CPU and the URL from the vendor that supports your claim? (0.25 points)
+
+M1 Pro, 10 cores (2 efficiency cores and 8 high performance cores, but let us consider them as same) 10 threads.
+
+Link: [Apple M1 Pro - www.notebookcheck.net](https://www.notebookcheck.net/Apple-M1-Pro-Processor-Benchmarks-and-Specs.579915.0.html)
+
+## b) What is the statistical summary (minimum, maximum, average, and standard deviation) of the time required to execute the thread_function?Please provide a pointer to the source code. (1.25 points)
+
+```{}
+Results for 1000 threads:
+Total time: 0.46233 seconds.
+Avg: 0.00045 seconds.
+Min: 0.00019 seconds.
+Max: 0.01884 seconds.
+Std: 0.00089 seconds.
+```
+
+[Code on Github](https://github.com/Linzh7/CSM13103-Cloud-and-Edge-Computing/tree/main/A12-Ray)
+
+The code are also aviliable at the end of this PDF file.
+
+## c) Now instead of spawning a thread, please invoke a function that performs the thread_function, and provide the statistical summary. (0.5)
+
+```{}
+Results for 1000 sum:
+Total time: 0.00504 seconds.
+Avg: 0.00000 seconds.
+Min: 0.00000 seconds.
+Max: 0.00001 seconds.
+Std: 0.00000 seconds
+```
+
+## d) What insights can you draw from the two results if you were the author of Ray and had to implement Ray's Tasks model. Specifically, in Section 3.1 the authors describe a Ray Task as follows: "a task represents the execution of a remote function on a stateless worker"? (1 points)
+
+From the results, we can easily find that the overhead of create and close threads cannot be ignored. Therefore, we might try to integrate small tasks together, and use threads when we have to. Moreover, for these workers in this network. We could use a processor which have a higher CPU frequency, maybe instead of the cores amount.
+
+# 3. In Section 3.1 the authors state "This implies idempotence." What is idempotence, and why is it important for fault tolerance? (0.5 points)
+
+Idempotence is a property that means it can be run multiple times and the results are same.
+
+This proberty could improve the fault-tolerance, because it allows for the function or operation to be re-executed if something goes wrong. Moreover, this makes it easier to recover from a failure without having to manually restore the state of the system.
+
+# 4. In Section 4.2.1, the authors state "At its core, GCS is a key-value store with pub-sub functionality". Can you elaborate what the authors imply by a "key-value store with pub-sub functionality" with an emphasis on why is the pub-sub functionality needed? Can you provide an example of a key-value store (preferably open-source) with pub-sub functionality? (0.5 points)
+
+That is a type of database that stores data in key-value pairs and also allows for the publication and subscription of messages. This structure enables the efficient transfer of data between nodes.
+
+I think Redis might be an example, Moreover it is also used by Ray to store object metadata.
+
+# 5. In Section 4.2.2, the authors state "the global scheduler computes the average task execution and the average transfer bandwidth using simple exponential averaging." What is exponential averaging, and what might be the reasons for this design choice? (0.5 points)
+
+Exponential averaging is a method of calculate an average by giving more weight to recent values. This design could ensure that the global scheduler is able to accurately estimate the average task execution and transfer bandwidth.
+
+This allows the scheduler to make better decisions about which tasks to assign to which nodes. Moreover, the scheduler can also more accurately reflect the current state of the system in this way.
+
+# 6. In Section 4.2.3, the authors state "In the case of node failure, Ray recovers any needed objects through lineage re-execution." Please elaborate on what is lineage re-execution and how objects can be recovered through lineage execution in case of node failures. (0.5 points)
+
+Lineage re-execution is a process what Ray re-get the object which may lost at some point by running the tasks. In this way, the failure tolerance could be improved, because Ray to recover any objects losted. Moreover, when a node fails, Ray will start from the most recent task results and run their job follow the previous workflow without any manual work.
+
+# 7. Please describe Figure 9 and specify a) what does the X-axis represent, b) what do the two Y-axes represent, c) what do the bars represent, d) what do the two lines represent, e) what is the key takeaway message in your opinion? (1 point)
+
+This graph compares the performance of Ray and OpenMPI for different object sizes. The X axis represents object sizes, which range from 1KB to 1GB. Moreover, on the left Y axis is the iteration time in milliseconds, and the right Y axis is the IOPS (input/output operations per second). Ray and OpenMPI iteration times are represented by bars, while IOPS are represented by two lines. 
+
+I think this graph told us that Ray have a better performance than OpenMPI on the aspect of iteration time and IOPS, particularly for larger object sizes.
+
+# 8. In Section 5.1, the authors state "Allreduce is a distributed communication primitive important to many machine learning workloads." What is all-reduce? Can you provide an example of all-reduce, and also cite the source you used to answer the question? (0.5 points)
+
+All-reduce is a distributed communication term which want to describe the easy communication and data exchange between multiple nodes. 
+
+BlueConnect is designed for distributed deep learning on GPU-based platforms. It optimizes the all-reduce operation by decomposing it into parallelizable reduce-scatter and all-gather operations to reduce synchronization overhead and adapt to various network configurations.
+
+Source: [BlueConnect: Novel Hierarchical All-Reduce on Multi-tired Network for Deep Learning](http://learningsys.org/nips18/assets/papers/6CameraReadySubmissionlearnsys2018_blc.pdf).
+
+# 9. What are the key strengths of Ray? (0.5 points)
+
+Flexibility, high throughput, and low latency, which are fit the requirements of reinforcement learning. The unified interface allows both task-parallel and actor-based computations, and its distributed scheduler enables high throughput and low latency. Additionally, Ray's global control store enables it to scale and recover from failures.
+
+# 10. What are the key weaknesses of this article, other than the points discussed in the Discussion section. (0.5 points)
+
+This paper did not provide some explanation of the implements in Ray, e.g., the algorithms used for scheduling and fault tolerance. 
+
+Additionally, the article does not discuss the security features of Ray, such as authentication and authorization.
+
+# 11. Have the authors of Ray committed any benchmarking crimes? If yes, please elaborate. (1 point)
+
+Yes, at figure 10 (a) the y axis do not have the correct scale even in the log unit.
+
+But the they have compared their results to those of other frameworks, such as TensorFlow, to accurately measure the overhead imposed by Ray.
+
+# 12. What insights can the authors of Borg get from Ray? Specifically, if you are cloud provider and you would like to serve customers who are using the Ray library, what must you offer your clients? (1 point)
+
+Borg could provide to their client with a distributed computing framework which have unified interface. 
+
+Moreover, Borg could also provide a distributed scheduler capable of handling millions of tasks per second with millisecond latencies. 
+
+Furthermore, Borg could provide a global control store capable of preserving computation lineage as well as a directory for data objects.
 
 
 
 
+# Appendix:
+
+## Code
+
+```{Python}
+import threading
+import time
+import numpy as np
+
+maxN = 1000
+numArray = np.random.randint(1, maxN, 10000)
 
 
+def sum_thread(numbers, n):
+    start_time = time.time()
+    result = sum(numbers[:n])
+    end_time = time.time()
+    return end_time - start_time
 
 
+def stat(results):
+    avg_exec_time = sum(results) / len(results)
+    print(
+        f"Avg: {avg_exec_time:.5f} seconds.\nMin: {min(results):.5f} seconds.\nMax: {max(results):.5f} seconds.\nStd: {np.std(results):.5f} seconds."
+    )
 
+
+if __name__ == "__main__":
+    # Create a list of random numbers
+    numbers = [i for i in range(1000)]
+    # Create a empty list to store the results
+    results = []
+    # Repeat thread creation and destruction 1000 times
+    num_repeats = 1000
+    t1 = time.time()
+    for i in range(num_repeats):
+        # Choose a random number of elements to add
+        n = np.random.randint(1, maxN)
+
+        # Create a new thread
+        start_time = time.time()
+        t = threading.Thread(target=sum_thread, args=(numbers, n))
+        t.start()
+
+        # Wait for the thread to finish
+        t.join()
+
+        # Print the total time for thread creation, execution, and destruction
+        end_time = time.time()
+        results.append(end_time - start_time)
+    print("Results for 1000 threads:")
+    print(f"Total time: {time.time() - t1:.5f} seconds.")
+    stat(results)
+
+    results = []
+    # Repeat thread creation and destruction 1000 times
+    num_repeats = 1000
+    t1 = time.time()
+    for i in range(num_repeats):
+        # Choose a random number of elements to add
+        n = np.random.randint(1, maxN)
+
+        # just sum, not a thread
+        start_time = time.time()
+        sum_thread(numbers, n)
+        end_time = time.time()
+        results.append(end_time - start_time)
+    print("Results for 1000 sum:")
+    print(f"Total time: {time.time() - t1:.5f} seconds.")
+    stat(results)
+```

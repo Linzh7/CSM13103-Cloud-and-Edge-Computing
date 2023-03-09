@@ -1,0 +1,150 @@
+---
+title: "A13-Recap"
+output: pdf_document
+---
+
+# 1.1 Project: Computing as a utility for a reliable collaboration platform
+
+## a) The strengths of the project in your opinion (0.25 points / project)
+
+There is no result for performance evaluation. Therefore, it is hard for me to give some critical opinions.
+
+But it is good for the demo includes the certificates in this project, which provides some securty ensurance.
+
+## b) The weaknesses in your opinion, and what would you do to address the weaknesses (0.25 points / project)
+
+There is no result for performance evaluation. Therefore, it is hard for me to give some critical opinions.
+
+However, if I could say something, I would like to suggest them use some other VM, instead of CSC. Because the server in CSC is aimed to provides some computing resouces, therefore, we cannot get a ROOT permisstion or full-control to the disk or profiles, which might lead to some weird error or inconvenient stuff.
+
+## c) The points that can be given for each section of the the project, and why. The maximum points for each section are available in the project submission page on Moodle? (1.5 point / project)
+
+### 1. Introduction
+
+4/5
+
+Maybe lack some description about the problem they are working on. But they do provide some key insights and takeaways.
+
+### Motivation
+
+3/3
+
+Great, I know that why they want to provides some cloud storage services.
+
+### Background
+
+1.5/2
+
+They only include Nextcloud, but other components they use do not be introducted.
+
+### System Architecture
+
+5/5
+
+Great, they listed every components they use, and also claimed the reason why they use them. Even give some details about how they deploy them.
+
+### Performance Evaluation
+
+1.5/5
+
+Hummm, they only gave the method to measure the performance, but there is no figure or number or any result.
+
+### Discussion
+
+2.5/5
+
+They discussed the environment and the work arrangement related stuff. However, I think there should be some discuss about the performance, the communication between the components, etc.
+
+### Availability
+
+2/5
+
+No video, only have a link to a Github repo (and the repo only has 1 commit).
+
+## Some weird stuff
+
+The introduction, background parts did not pass the AI text, 'Your text is likely to be written entirely by AI'. But I do not mind that. XDDDD
+
+They forget to cite paper in the format they want, just left a 'configure citing method and cite using APA:xxx'. I will jsut add APA cites.
+
+
+# 1.2 Project: Cloud Collaboration Platform
+
+## a) The strengths of the project in your opinion (0.25 points / project)
+
+They includes lots of details in consideration, e.g., the transport layer security though they did not implement them. The choices of components are also express that they have experiance.
+
+## b) The weaknesses in your opinion, and what would you do to address the weaknesses (0.25 points / project)
+
+As they mentioned, maybe they to make the cluster stable could be the next step. However, I am not a network people, the only idea I could give maybe monitor the resources usage and the warning message to figure out which compoment cauzed the unstable.
+
+## c) The points that can be given for each section of the the project, and why. The maximum points for each section are available in the project submission page on Moodle? (1.5 point / project)
+
+## c) The points that can be given for each section of the the project, and why. The maximum points for each section are available in the project submission page on Moodle? (1.5 point / project)
+
+### 1. Introduction
+
+5/5
+
+Great, I know that why they want to focus on this area, and what kinds of components they use, etc.
+
+### Motivation
+
+3/3
+
+Good motivation, they do have some experience in this project.
+
+### Background
+
+1/2
+
+Maybe some extra words could be used in this part to introduce what these components are.
+
+### System Architecture
+
+5/5
+
+Good illustration, I know how these components communicate to each other. And the explanation also let me know what kinds of thing they are..
+
+### Performance Evaluation
+
+5/5
+
+The evaluation uses figures to support their conclusion and explain the reason. 
+
+### Discussion
+
+5/5
+
+Great explanation and valuable opinions.
+
+### Availability
+
+5/5
+
+Great github repo, README gives me some basic ideas about how to deploy them.
+
+And the Video, hahahahahahahahahahahahahaha, so funny. Also, they give enough function demonstrate.
+
+
+# 2. Of the 12 articles discussed during the course, please select any 3 articles that are relevant to either i) your project, or ii) possible extensions of your project, or iii) any one of the projects you reviewed (in case you did not submit a project). For each article specify what insights and ideas from the article can be leveraged to enhance the project (1 point / article)   
+
+
+1. I think Ray might related to our project. Ray provides a distributed framework, which aimed to enable large models. But we also could use this idea to edge computing, like we could use some STM 32 chips to extract the landmarks from images. Moreover, reinforcement learning also could be adopted in our model. If we use our model in a certain environment, like family, we could evolution our model to achieve a higher accuracy.
+
+2. Then, serverless is also important. We have done something to ensure the stored data cannot be converted to images, therefore, some compute could be done on cloud. In this context, serverless enables the cloud service scale to zero to save money. Moreover, our service also could benefit from serverless from event-driven processing.
+
+3. Ramcloud also gives me some hints. If we have a huge vector databse, e.g., well, maybe we have a farm and lots of cats, dogs, etc., we want to face recognition them, maybe we need some efficient methods to store them. Moreover, if we get the input as a depth-image, which could be captured by the depth camera on iPhone, the size of data will also increased rapidly.
+
+
+# 3. Of the 12 articles discussed during the course, please select any 3 articles that are relevant to any one of the projects you reviewed (other than the one used for Q2). Note that there are no restrictions on the articles chosen, and they can even be the same 3 articles used for Q3. For each article specify what insights and ideas from the article can be leveraged to enhance the project (1 point / article )
+
+1. The Cloud Collaboration Platform might benefit from cloudlets. Because if we could deploy some cloudlets at different location, e.g., in Espoo, the latency in Helsinki area might reduced a lot. In this way, we could provides different cloudlets in different area to support local requests. If some collaboration need cross-board action, we might could find a bigger datacenter with higher QoS to support them. Additionally, the security of users data also could be improved, because we do not have to processing them to a cloud server, which might located in US, and it will violate the laws in EU that do not allow companies transfer data outside EU and some other security countries.
+
+2. Moreover, Cloud Collaboration Platform also could benefit from Borg. For example, they could have a efficient resource utilization, and also a better fault-tolerance, which is also mentioned at their report. Moreover, maybe the most valuable idea from Borg is not the technocal details, instead, maybe the principle of design and develop a huge distributed system.
+
+3. Also for Cloud Collaboration Platform, I think Virtualize Storage could improve the user experiance. Because if they want to build a platform support lots of files, how to storage them, and how to load them when user send requests will become a question. Moreover, to reduce the cost of build a cluster, we should enable heterogeneity of hardware and software in our platform.
+
+
+
+
